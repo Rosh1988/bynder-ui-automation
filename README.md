@@ -21,5 +21,9 @@
 
 #### :hammer_and_wrench: Configuration
 Config files:
-1. `cypress.config.js` - Main config file where default behavior of Cypress can be modified. [More info](https://docs.cypress.io/guides/references/configuration)
+1. `cypress.config.js` - Main config file where default behavior of Cypress can be modified.
+
+## :heavy_check_mark: Test Scenarios
+
+
 
