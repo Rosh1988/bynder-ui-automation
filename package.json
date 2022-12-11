@@ -9,6 +9,6 @@
   "author": "Roshni Sharma",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.0.1"
+    "cypress": "^12.0.2"
   }
 }
