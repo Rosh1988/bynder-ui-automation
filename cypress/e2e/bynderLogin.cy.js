@@ -17,7 +17,7 @@ describe("Test Bynder Login Functionality", function()
     it("Successful Log in to the website", function()
     {
         cy.get(login.emailField).type(uname);
-        cy.get(login.passwordField).type(validPwd)
+        cy.get(login.passwordField).type(inValidPwd)
         cy.get(login.submitField).click()
         cy.get(login.userProfile).should('be.visible')
     })
