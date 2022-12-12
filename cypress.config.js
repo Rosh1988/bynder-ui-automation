@@ -7,6 +7,5 @@ module.exports = defineConfig({
     //defaultCommandTimeout: 10000,
     baseUrl: "https://wave-trial.getbynder.com",
     supportFile: false,
-    projectId: "cwfmzg"
   }
 });
