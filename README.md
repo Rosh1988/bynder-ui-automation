@@ -29,15 +29,15 @@ npm install cypress --save-dev
 __To run tests in Test Runner, execute below command in terminal__
 
 ```sh
-npm cypress open --env CYPRESS_UNAME=<valid_username>,CYPRESS_PWD=<valid_password>
+npm cypress open --env validUname=<valid_username>,validPwd=<valid_password>
 ```
 
 __To run tests in CLI mode, execute below command in terminal__:
 ```sh
-npm cypress run --env CYPRESS_UNAME=<valid_username>,CYPRESS_PWD=<valid_password>
+npm cypress run --env validUname=<valid_username>,validPwd=<valid_password>
 ```
 
-> Note: When running the project locally if you don't want to provide credentials as command line arguments you can update the cypress.env.json file to add valid credentials (CYPRESS_UNAME & CYPRESS_PWD) in it.
+> Note: When running the project locally if you don't want to provide credentials as command line arguments you can update the cypress.env.json file to add valid credentials (validUname & validPwd) in it.
 
 
 ## Dockerfile
