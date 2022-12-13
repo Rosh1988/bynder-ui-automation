@@ -1,8 +1,8 @@
 import login from "../selectors/bynderLogin.sel";
 
-var invalidUname = "user_" + Math.random().toString(36);
-var uname =  Cypress.env('uname');
-var validPwd = Cypress.env('cypress_validPwd');
+var validUname =  Cypress.env('CYPRESS_UNAME');
+var validPwd = Cypress.env('CYPRESS_PWD');
+var inValidUname = Cypress.env('inValidUname');
 var inValidPwd = Cypress.env('inValidPwd');
 var errMsgInvalidCred = Cypress.env('errMsgInvalidCred');
 var errMsgMissingPwd = Cypress.env('errMsgMissingPwd');
@@ -12,42 +12,46 @@ describe("Test Bynder Login Functionality", function()
 {
     beforeEach(() => {
         cy.visit("login/")  //baseUrl set in cypress config
+        cy.get(login.languageButton).click(); //select EN as Language to prevent cookie overwrite
+        cy.get(login.languageEn).contains('English (United States)').click();
       })
 
-    it("Successful Log in to the website", function()
+    it("Successfully Log in to the website", function()
     {
-        cy.get(login.emailField).type(uname);
+        cy.get(login.emailField).type(validUname);
         cy.get(login.passwordField).type(validPwd)
         cy.get(login.submitField).click()
         cy.get(login.userProfile).should('be.visible')
+        cy.get(login.userProfile).click()
+        cy.get(login.logoutButton).click()
     })
 
-    it("Log in with invalid credentials to the website", function()
+    it("Login with an invalid credentials to the website", function()
     {
-        cy.get(login.emailField).type(invalidUname)
+        cy.get(login.emailField).type(inValidUname)
         cy.get(login.passwordField).type(inValidPwd)
         cy.get(login.submitField).click()
         cy.get(login.messageLabel).should('have.text', errMsgInvalidCred)
     });
 
-    it("Log in with invalid password to the website", function()
+    it("Login with invalid password to the website", function()
     {
-        cy.get(login.emailField).type(uname)
+        cy.get(login.emailField).type(validUname)
         cy.get(login.passwordField).type(inValidPwd)
         cy.get(login.submitField).click()
         cy.get(login.messageLabel).should('have.text', errMsgInvalidCred)
     });
 
-    it("Login with correct username and leave password field empty", function()
+    it("Login with an empty password field to the website", function()
     {
-        cy.get(login.emailField).type(uname)
+        cy.get(login.emailField).type(validUname)
         cy.get(login.submitField).click()
         cy.get(login.messageLabel).should('have.text', errMsgMissingPwd)
     });
 
     it("User logs out and lands on login page", function()
     {
-        cy.get(login.emailField).type(uname)
+        cy.get(login.emailField).type(validUname)
         cy.get(login.passwordField).type(validPwd)
         cy.get(login.submitField).click()
         cy.get(login.userProfile).click()
