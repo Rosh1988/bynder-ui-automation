@@ -17,8 +17,6 @@ Pre-requisite:
 - Install Node js and npm from [here](https://nodejs.org/en/download/ "here").
 - git clone https://github.com/Rosh1988/bynder-ui-automation.git
 - cd to cypress folder
-- Rename "cypress.env.json_template" file to "cypress.env.json"
-- In gthe renamed file, update the 'cypress_ValidPwd' and 'uname' variables with the credentials for running the tests.
 
 __Install Cypress__
 ```shell
@@ -31,13 +29,16 @@ npm install cypress --save-dev
 __To run tests in Test Runner, execute below command in terminal__
 
 ```sh
-npm cypress open
+npm cypress open --env CYPRESS_UNAME=<valid_username>,CYPRESS_PWD=<valid_password>
 ```
 
 __To run tests in CLI mode, execute below command in terminal__:
 ```sh
-npm cypress run
+npm cypress run --env CYPRESS_UNAME=<valid_username>,CYPRESS_PWD=<valid_password>
 ```
+
+> Note: When running the project locally if you don't want to provide credentials as command line arguments you can update the cypress.env.json file to add valid credentials (CYPRESS_UNAME & CYPRESS_PWD) in it.
+
 
 ## Dockerfile
 
@@ -58,41 +59,51 @@ As a new user I want to login to [Bynder portal](https://wave-trial.getbynder.co
 
 __Scenario #1: Successfully Log in to the website__
 
-**Given** User is on https://wave-trial.getbynder.com/login/ **When** User enters a valid email/username and password
+**Given** User is on https://wave-trial.getbynder.com/login/
+**When** User enters a valid email/username and password
 **And** User clicks logs in
 **Then** User should be successfully logged into the site
-**And** User lands on Dashboard **And** User Profile is shown correctly
+**And** User lands on Dashboard
+**And** User Profile is shown correctly
+
+------------
+__Scenario #2 : Login with an invalid credentials to the website__
+
+**Given** User is on https://wave-trial.getbynder.com/login/
+**When** User enters an invalid email <email> and invalid password <password>
+**And** User clicks Login button
+**Then** A message "You have entered an incorrect username or password information" should be displayed
+
 
 ------------
 
-__Scenario #2: User logs out and lands on login page__
+__Scenario #3 : Login with invalid password to the website__
+
+**Given** User is on https://wave-trial.getbynder.com/login/
+**When** User enters a valid email <email> and an invalid password <password>
+**And** User clicks logs in
+**Then** A message "You have entered an incorrect username or password information" should be displayed
+
+------------
+
+__Scenario #4 : Login with an empty password field to the website__
+
+**Given** User is on https://wave-trial.getbynder.com/login/
+**When** User enters a valid email <email>
+**But** Leaves password field empty
+**And** Clicks on Login button
+**Then** A message "Please enter your password" should be displayed.
+
+------------
+
+__Scenario #5: User logs out and lands on login page__
+
 **Given** User is logged in
 **When** User clicks on profile dropdown
 **And** User clicks on Logout
 **Then** User is logged out
 **And** User lands back on Login page
 
-------------
-
-__Scenario #3 : Log in with invalid password to the website__
-**Given** User is on https://wave-trial.getbynder.com/login/ **When** User enters a valid email <email> and an invalid password <password>
-**And** User clicks logs in
-**Then** A message "You have entered an incorrect username or password information" should be displayed
-
-------------
-
-__Scenario #4 : Login with an invalid credentials to the website__
-**Given** User is on https://wave-trial.getbynder.com/login/ **When** User enters an invalid email <email> and invalid password <password>
-**And** User clicks Login button
-**Then** A message "You have entered an incorrect username or password information" should be displayed
-
-------------
-
-__Scenario #5 : Login with an empty password field to the website__
-**Given** User is on https://wave-trial.getbynder.com/login/ **When** User enters a valid email <email>
-**But** Leaves password field empty
-**And** Clicks on Login button
-**Then** A message "Please enter your password" should be displayed.
 
 ## CI CD Pipeline on GitHub
-A CI CD Pipeline is created on GitHub using the GitHub Actions. The Workflow runs the pipeline on every push and executes the automation tests.
+A CI CD Pipeline is created on GitHub using the GitHub Actions. The Workflow runs the pipeline on every push and executes the automation tests. The Pipeline runs with the test user "byndertest"
