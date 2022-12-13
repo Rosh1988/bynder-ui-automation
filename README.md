@@ -70,7 +70,7 @@ __Scenario #1: Successfully Log in to the website__
 __Scenario #2 : Login with an invalid credentials to the website__
 
 **Given** User is on https://wave-trial.getbynder.com/login/
-**When** User enters an invalid email <email> and invalid password <password>
+**When** User enters an invalid email and an invalid password
 **And** User clicks Login button
 **Then** A message "You have entered an incorrect username or password information" should be displayed
 
@@ -80,7 +80,7 @@ __Scenario #2 : Login with an invalid credentials to the website__
 __Scenario #3 : Login with invalid password to the website__
 
 **Given** User is on https://wave-trial.getbynder.com/login/
-**When** User enters a valid email <email> and an invalid password <password>
+**When** User enters a valid email and an invalid password
 **And** User clicks logs in
 **Then** A message "You have entered an incorrect username or password information" should be displayed
 
@@ -89,7 +89,7 @@ __Scenario #3 : Login with invalid password to the website__
 __Scenario #4 : Login with an empty password field to the website__
 
 **Given** User is on https://wave-trial.getbynder.com/login/
-**When** User enters a valid email <email>
+**When** User enters a valid email
 **But** Leaves password field empty
 **And** Clicks on Login button
 **Then** A message "Please enter your password" should be displayed.
@@ -106,4 +106,4 @@ __Scenario #5: User logs out and lands on login page__
 
 
 ## CI CD Pipeline on GitHub
-A CI CD Pipeline is created on GitHub using the GitHub Actions. The Workflow runs the pipeline on every push and executes the automation tests. The Pipeline runs with the test user "byndertest"
+A CI CD Pipeline is created on GitHub using the GitHub Actions. The Workflow runs the pipeline on every push and executes the automation tests. The Pipeline runs with the test user "byndertest" and the password is supplied as a secret token.

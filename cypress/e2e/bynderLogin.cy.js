@@ -19,7 +19,7 @@ describe("Test Bynder Login Functionality", function()
     it("Successfully Log in to the website", function()
     {
         cy.get(login.emailField).type(validUname);
-        cy.get(login.passwordField).type(validPwd)
+        cy.get(login.passwordField).type(validPwd, {log: false})
         cy.get(login.submitField).click()
         cy.get(login.userProfile).should('be.visible')
         cy.get(login.userProfile).click()
@@ -52,7 +52,7 @@ describe("Test Bynder Login Functionality", function()
     it("User logs out and lands on login page", function()
     {
         cy.get(login.emailField).type(validUname)
-        cy.get(login.passwordField).type(validPwd)
+        cy.get(login.passwordField).type(validPwd, {log: false})
         cy.get(login.submitField).click()
         cy.get(login.userProfile).click()
         cy.get(login.logoutButton).click()
