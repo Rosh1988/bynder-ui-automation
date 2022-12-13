@@ -1,7 +1,7 @@
 import login from "../selectors/bynderLogin.sel";
 
-var validUname =  Cypress.env('CYPRESS_UNAME');
-var validPwd = Cypress.env('CYPRESS_PWD');
+var validUname =  Cypress.env('validUname');
+var validPwd = Cypress.env('validPwd');
 var inValidUname = Cypress.env('inValidUname');
 var inValidPwd = Cypress.env('inValidPwd');
 var errMsgInvalidCred = Cypress.env('errMsgInvalidCred');
