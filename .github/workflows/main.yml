@@ -11,4 +11,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         env:
-          cypress_validPwd: ${{secrets.UNAME_TOKEN}}
+          CYPRESS_UNAME: byndertest
+          CYPRESS_PWD: ${{secrets.PWD_TOKEN}}
